@@ -4,7 +4,8 @@ exports.staffDetails = (req, res, next) => {
     const staffs = staffModel.find()
     .then(result => {
         res.status(200).json({
-            staffs: result
+            staffs: result,
+            userId: req.userId
         });
     })
     .then(error => {
@@ -58,28 +59,6 @@ exports.staffUpdate = (req, res, next) => {
         res.status(200).json({
             message: 'Staff details updated.',
             staff: staff
-        });
-    })
-    .catch(error => {
-        console.log(error);
-    });
-};
-
-exports.newStaff = (req, res, next) => {
-    const name = req.body.name;
-    const designation = req.body.designation;
-    const subject = req.body.subject;
-
-    const staff = new staffModel({
-        name: name,
-        designation: designation,
-        subject: subject
-    });
-    
-    staff.save()
-    .then(result => {
-        res.status(201).json({
-            message: 'success',
         });
     })
     .catch(error => {
