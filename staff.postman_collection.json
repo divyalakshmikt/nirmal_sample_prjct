@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "b694b55c-3968-408b-a195-5b0d54ed99e0",
+		"name": "staff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get staff",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNfdmlzaG51IiwidXNlcklkIjoiNjFkNjk4YWNlYWJjY2FiZjA0MGFkYWE1IiwiaWF0IjoxNjQxNDU0NzM2LCJleHAiOjE2NDE0NTgzMzZ9.RfQJNw8PI5naUWA8YWQrdz9yzxh2J_SWPP-TsT0vNTw",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:8000/staffs",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"staffs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new staff",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Sathi Devi\",\r\n    \"designation\" : \"office-staff\",\r\n    \"subject\" : \"none\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/staffs/newStaff",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"staffs",
+						"newStaff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Staff Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Balakrishnan\",\r\n    \"designation\" : \"Principal\",\r\n    \"subject\" : \"Mathematics\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/staffs/61d5ef05fdb9a0b560fd0b64",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"staffs",
+						"61d5ef05fdb9a0b560fd0b64"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8000/removeStaff/61d5ef42fdb9a0b560fd0b67",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"removeStaff",
+						"61d5ef42fdb9a0b560fd0b67"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign-Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullname\" : \"Vishnu\",\r\n    \"username\" : \"C_vishnu\",\r\n    \"password\" : \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/signUp",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"C_vishnu\",\r\n    \"password\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/Login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"Login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
