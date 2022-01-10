@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My User Project CRUD",
+    "description": "Teacher Info Application API",
+    "license": {
+      "name": "Nirmal"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Teachers",
+      "description": "API for teachers in the system"
+    }
+  ],
+  "components":{
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "description": "JWT authorization header using the bearer scheme.",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
+},
+  "security": [
+    {
+      "bearerAuth": []
+    } 
+  ],
+  "teachers": [
+    "application/json"
+  ],
+  "users": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Log in to system",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "required": true,
+            "description": "Login to the system",
+            "schema": {
+              "$ref": "#/definition1/loginInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definition1/loginSuccess"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/signUp": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Teacher that we want to create",
+            "schema": {
+              "$ref": "#/definition/Users"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New teacher is created",
+            "schema": {
+              "$ref": "#/definition/Users"
+            }
+          }
+        }
+      }
+    },
+    "/teachers": {
+      "get": {
+        "tags": [
+          "Teachers"
+        ],
+        "summary": "Get all teachers in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teachers"
+            }
+          }
+        }
+      }
+    },
+    "/teachers/newTeacher": {
+      "post": {
+        "tags": [
+          "Teachers"
+        ],
+        "description": "Create new teacher in system",
+        "parameters": [
+          {
+            "teachername": "teacher",
+            "in": "body",
+            "description": "Teacher that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Teachers"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Create new entries to system",
+        "responses": {
+          "200": {
+            "description": "New teacher is created",
+            "schema": {
+              "$ref": "#/definitions/Teachers"
+            }
+          }
+        }
+      }
+    },
+    "/teachers/{teacherId}": {
+      "parameters": [
+        {
+          "name": "teacherId",
+          "in": "path",
+          "required": true,
+          "description": "ID of teacher that we want to find",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update teacher with give ID",
+        "tags": [
+          "Teachers"
+        ],
+        "parameters": [
+          {
+            "name": "Teacher",
+            "in": "body",
+            "description": "Teacher with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Teachers"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Teacher is updated",
+            "schema": {
+              "$ref": "#/definitions/Teachers"
+            }
+          }
+        }
+      }
+    },
+    "/removeTeacher/{teacherId}": {
+      "parameters": [
+        {
+          "name": "teacherId",
+          "in": "path",
+          "required": true,
+          "description": "ID of teacher that we want to DELETE",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete teacher with given ID",
+        "tags": [
+          "Teachers"
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/Teachers"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definition": {
+    "Users": {
+      "required": [
+        "fullname",
+        "username",
+        "password"
+      ],
+      "properties": {
+        "fullname": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Teachers": {
+      "required": [
+        "teachername",
+        "designation",
+        "subject"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "designation": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "definition1": {
+    "loginInfo": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Enter Username"
+        },
+        "Password": {
+          "type": "string",
+          "description": "Enter password"
+        }
+      }
+    },
+    "loginSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
