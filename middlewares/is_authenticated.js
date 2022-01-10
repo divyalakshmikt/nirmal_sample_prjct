@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const userId = require('../Controllers/authController');
+const userId = require('../controllers/authController');
 
 module.exports = async (req, res, next) => {
     let decodedToken;

@@ -6,7 +6,7 @@ exports.signUp = async (req, res, next) => {
     const fullname = req.body.fullname;
     const username = req.body.username;
     const Password = req.body.password;
-    
+
     const passwordHash = await bcrypt.hash(Password, 12);
 
     const user = new User({
@@ -27,6 +27,8 @@ exports.login = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
+    console.log("---- req,body --- :", req.body)
+
     const user = await User.findOne({ username: username });
     if (!user) {
         res.status(500).json({
@@ -40,7 +42,7 @@ exports.login = async (req, res, next) => {
         res.status(500).json({
             message: "Invalid credentials."
         });
-    } 
+    }
 
     const token = await jwt.sign({
         username: username,

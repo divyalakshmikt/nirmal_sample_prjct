@@ -6,15 +6,13 @@ const mongoose = require('mongoose');
 app.use(bodyParser.json());
 
 const swaggerUI = require('swagger-ui-express'),
- swaggerDocument = require('./swagger.json');
+    swaggerDocument = require('./swagger.json');
 
 
-const staffRoutes = require('./routes/staff');
-const authRoutes = require('./routes/authentication');
-const is_auth = require('./middlewares/is_authenticated');
 
-app.use( is_auth, staffRoutes);
-app.use( authRoutes);
+// const is_auth = require('./middlewares/is_authenticated');
+
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,13 +23,20 @@ app.use((req, res, next) => {
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
+
+
+var staffRoutes = require('./routes/staff');
+var authRoutes = require('./routes/authentication');
+app.use(staffRoutes);
+app.use(authRoutes);
+
 mongoose.connect('mongodb+srv://expressNode:qwerty098@cluster0.79awc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-.then(result => {
-    app.listen(8000, () => {
-        console.log('Server live on port 8000..!');
-    });
-})
-.then(error => {
-    console.log(error);
-})
+    .then(result => {
+        app.listen(8000, () => {
+            console.log('Server live on port 8000..!');
+        });
+    })
+    .then(error => {
+        console.log(error);
+    })
 
