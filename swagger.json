@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My User Project CRUD",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "Vishnu"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Staffs",
+      "description": "API for staffs in the system"
+    }
+  ],
+  "components":{
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "description": "JWT authorization header using the bearer scheme.",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
+},
+  "security": [
+    {
+      "bearerAuth": []
+    } 
+  ],
+  "staffs": [
+    "application/json"
+  ],
+  "users": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Log in to system",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "required": true,
+            "description": "Login to the system",
+            "schema": {
+              "$ref": "#/definition1/loginInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definition1/loginSuccess"
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      }
+    },
+    "/signUp": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Staff that we want to create",
+            "schema": {
+              "$ref": "#/definition/Users"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New staff is created",
+            "schema": {
+              "$ref": "#/definition/Users"
+            }
+          }
+        }
+      }
+    },
+    "/staffs": {
+      "get": {
+        "tags": [
+          "Staffs"
+        ],
+        "summary": "Get all staffs in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Staffs"
+            }
+          }
+        }
+      }
+    },
+    "/staffs/newStaff": {
+      "post": {
+        "tags": [
+          "Staffs"
+        ],
+        "description": "Create new staff in system",
+        "parameters": [
+          {
+            "name": "staff",
+            "in": "body",
+            "description": "Staff that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Staffs"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Create new entries to system",
+        "responses": {
+          "200": {
+            "description": "New staff is created",
+            "schema": {
+              "$ref": "#/definitions/Staffs"
+            }
+          }
+        }
+      }
+    },
+    "/staffs/{staffId}": {
+      "parameters": [
+        {
+          "name": "staffId",
+          "in": "path",
+          "required": true,
+          "description": "ID of staff that we want to find",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "summary": "Update staff with give ID",
+        "tags": [
+          "Staffs"
+        ],
+        "parameters": [
+          {
+            "name": "Staff",
+            "in": "body",
+            "description": "Staff with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Staffs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Staff is updated",
+            "schema": {
+              "$ref": "#/definitions/Staffs"
+            }
+          }
+        }
+      }
+    },
+    "/removeStaff/{staffId}": {
+      "parameters": [
+        {
+          "name": "staffId",
+          "in": "path",
+          "required": true,
+          "description": "ID of staff that we want to DELETE",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete staff with given ID",
+        "tags": [
+          "Staffs"
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/Staffs"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definition": {
+    "Users": {
+      "required": [
+        "fullname",
+        "username",
+        "password"
+      ],
+      "properties": {
+        "fullname": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Staffs": {
+      "required": [
+        "name",
+        "designation",
+        "subject"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "designation": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "definition1": {
+    "loginInfo": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Enter Username"
+        },
+        "Password": {
+          "type": "string",
+          "description": "Enter password"
+        }
+      }
+    },
+    "loginSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
